@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('artists', function (Blueprint $table) {
+        Schema::create('kapper_beschikbaarheid', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->date('birthdate')->nullable();
-            $table->string('photo')->nullable(); // Assuming 'photo' is the path to the image file
+            $table->unsignedBigInteger('kapper_id');
+            $table->dateTime('start_tijd');
+            $table->dateTime('eind_tijd');
             $table->timestamps();
+
+            $table->foreign('kapper_id')->references('id')->on('kappers')->onDelete('cascade');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('artists');
+        Schema::dropIfExists('kapper_beschikbaarheid');
     }
 };

@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('songs', function (Blueprint $table) {
+        Schema::create('beschikbaarheid_dienst', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->foreignId('genre_id');
-            $table->foreignId('artist_id');
-            $table->foreignId('album_id');
-            $table->integer('BPM');
-            $table->text('key');
+            $table->string('naam');
+            $table->text('beschrijving')->nullable();
+            $table->decimal('prijs', 8, 2);
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('songs');
+        Schema::dropIfExists('beschikbaarheid_dienst');
     }
 };
